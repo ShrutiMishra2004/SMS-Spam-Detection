@@ -1,79 +1,141 @@
-📩 SMS Spam Classifier
-A machine learning project to detect spam messages using NLP techniques and classification algorithms. This project processes SMS data, performs thorough exploratory data analysis, text preprocessing, vectorization, and finally builds and evaluates multiple models to classify messages as spam or ham (not spam).
+📩 SMS Spam Classifier using NLP and Machine Learning
+This project presents a robust end-to-end solution for detecting spam SMS messages using Natural Language Processing (NLP) and Machine Learning (ML). It involves data cleaning, exploratory data analysis, text preprocessing, feature extraction using TF-IDF, and building multiple classification models. The final model achieves high accuracy and precision, making it ideal for spam filtering applications.
 
-📂 Dataset
-The dataset contains 5,572 SMS messages.
-Labeled as:
-ham = not spam
-spam = unsolicited message
-Original columns: v1 (label), v2 (text), plus 3 unnamed/irrelevant columns (dropped during cleaning).
+📁 Dataset Overview
+Source: UCI SMS Spam Collection Dataset
 
-🧹 Steps Followed
-1. Data Cleaning
-Removed irrelevant columns.
-Renamed columns for clarity: v1 → Target, v2 → Text.
-Encoded labels using LabelEncoder: ham → 0, spam → 1.
-Removed duplicate entries.
+Size: 5,572 messages
 
-2. Exploratory Data Analysis (EDA)
-Visualized class distribution (imbalanced).
-Extracted:
-Character count
+Columns:
+
+v1: Label (ham or spam)
+
+v2: Message text
+
+Preprocessing:
+
+Dropped 3 unnamed irrelevant columns
+
+Renamed columns to Target and Text
+
+Converted labels to binary (ham → 0, spam → 1)
+
+🔍 Project Workflow
+📌 1. Data Cleaning
+Removed nulls and duplicates
+
+Encoded labels
+
+Cleaned and structured the dataset for analysis
+
+📊 2. Exploratory Data Analysis (EDA)
+Checked class imbalance (spam ≈ 11.7%, ham ≈ 88.3%)
+
+Analyzed:
+
+Message length
+
 Word count
+
 Sentence count
-Generated histograms and pairplots to explore message characteristics by class.
 
-3. Text Preprocessing
-Lowercased text
+Visualized:
+
+Distribution plots
+
+Pair plots
+
+Word clouds (for spam and ham)
+
+Most frequent words
+
+🧹 3. Text Preprocessing
+Custom function transform_text() performs:
+
+Lowercasing
+
 Tokenization
-Removed stopwords and punctuation
-Applied stemming (PorterStemmer)
-Created a transform_text() function to automate preprocessing
 
-4. Feature Engineering
-Vectorized text using TF-IDF (TfidfVectorizer) with top 3,000 features.
+Removing stopwords & punctuation
 
-5. Model Building
-Trained three classifiers:
-Multinomial Naive Bayes ✅ (Best performing)
-Bernoulli Naive Bayes
-Gaussian Naive Bayes
+Stemming using PorterStemmer
 
-Evaluated using:
-Accuracy
-Confusion Matrix
-Precision Score
+🧠 4. Feature Extraction
+Used TfidfVectorizer to convert text into numerical feature vectors
 
-Model	Accuracy	Precision
-MultinomialNB	97.09%	100%
-BernoulliNB	98.36%	99.18%
-GaussianNB	86.94%	50.68%
+Extracted top 3,000 features
 
-6. Model Saving
-Final model (MultinomialNB) and vectorizer saved using pickle:
+🤖 5. Model Building
+Trained and evaluated 3 classifiers:
+
+Classifier	Accuracy	Precision
+Multinomial Naive Bayes	97.1%	100%
+Bernoulli Naive Bayes	98.3%	99.18%
+Gaussian Naive Bayes	86.9%	50.68%
+
+🔥 MultinomialNB outperformed others and was selected as the final model.
+
+💾 6. Model Deployment
+Saved the model and vectorizer using pickle
+
 model.pkl
+
 vectorizer.pkl
 
-📊 Visualizations
-Word clouds for spam and ham messages
-Bar plots of most frequent words
-Heatmap of feature correlation
+📈 Visual Insights
+📊 Bar charts for most common words
 
-🛠️ Requirements
-Install dependencies with:
+☁️ Word clouds for spam vs. ham
+
+🔥 Heatmap showing feature correlations
+
+📉 Distribution plots for message metrics
+
+🛠️ Technologies & Libraries
+Python
+
+Pandas, NumPy
+
+Matplotlib, Seaborn
+
+NLTK
+
+Scikit-learn
+
+WordCloud
+
+Pickle
+
+🚀 How to Run
+Install dependencies:
+
 bash
 Copy
 Edit
 pip install numpy pandas matplotlib seaborn nltk scikit-learn wordcloud
-🧠 Future Improvements
-Handle class imbalance (e.g., using SMOTE)
+Run the Jupyter Notebook:
 
-Hyperparameter tuning
+bash
+Copy
+Edit
+jupyter notebook
+Train & Save the Model:
+The notebook saves:
 
-Try deep learning approaches (LSTM, BERT)
+Trained model → model.pkl
 
-Build a web UI using Flask or Streamlit
+TF-IDF vectorizer → vectorizer.pkl
+
+(Optional): Build a front-end using Flask or Streamlit for deployment.
+
+🔮 Possible Improvements
+Address class imbalance using SMOTE or class weighting
+
+Hyperparameter tuning with GridSearchCV
+
+Integrate Deep Learning models (LSTM, BERT)
+
+Deploy with a web UI and live SMS input
 
 ✅ Conclusion
-This project demonstrates the effectiveness of traditional NLP and machine learning techniques in detecting spam messages with high precision using Multinomial Naive Bayes.
-
+This project showcases how traditional NLP and machine learning techniques can accurately detect spam messages. With high accuracy and precision, it can be used in real-world SMS spam detection systems.
